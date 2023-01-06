@@ -9,40 +9,6 @@ const useStorage = (file: File) => {
   const [url, setUrl] = useState("");
 
   useEffect(() => {
-    // const updateProgress = (ev: ProgressEvent<EventTarget>) => {
-    //   if (ev.lengthComputable) {
-    //     const pct = (ev.loaded / ev.total) * 100;
-    //     setProgress(pct);
-    //   }
-    // };
-    //
-    // const handleTransferComplete = async (ev: ProgressEvent<EventTarget>) => {
-    //   console.log("The transfer is complete.");
-    //
-    //   const {
-    //     data: { publicUrl },
-    //   } = supabase.storage.from("new-bucket").getPublicUrl(file.name);
-    //   setUrl(publicUrl);
-    //   const { error } = await supabase
-    //     .from("images")
-    //     .insert({ url: publicUrl });
-    //   if (error) setError(error);
-    // };
-    //
-    // const handleTransferFailed = (ev: ProgressEvent<EventTarget>) => {
-    //   console.log("An error occurred while transferring the file.");
-    // };
-    //
-    // const req = new XMLHttpRequest();
-    // req.upload.onprogress = updateProgress;
-    // req.upload.onload = handleTransferComplete;
-    // req.upload.onerror = handleTransferFailed;
-    // req.open(
-    //   "POST",
-    //   `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/new-bucket/${file.name}`
-    // );
-    // req.send(file);
-    //
     (async () => {
       const { data, error } = await supabase.storage
         .from("new-bucket")
@@ -72,3 +38,37 @@ const useStorage = (file: File) => {
 };
 
 export default useStorage;
+
+// const updateProgress = (ev: ProgressEvent<EventTarget>) => {
+//   if (ev.lengthComputable) {
+//     const pct = (ev.loaded / ev.total) * 100;
+//     setProgress(pct);
+//   }
+// };
+
+// const handleTransferComplete = async (ev: ProgressEvent<EventTarget>) => {
+//   console.log("The transfer is complete.");
+//   const {
+//     data: { publicUrl },
+//   } = supabase.storage.from("new-bucket").getPublicUrl(file.name);
+//   setUrl(publicUrl);
+//   const { error } = await supabase.from("images").insert({ url: publicUrl });
+//   if (error) {
+//     console.error(error);
+//     setError(error);
+//   }
+// };
+
+// const handleTransferFailed = (ev: ProgressEvent<EventTarget>) => {
+//   console.error("An error occurred while transferring the file.");
+// };
+
+// const req = new XMLHttpRequest();
+// req.upload.onprogress = updateProgress;
+// req.upload.onload = handleTransferComplete;
+// req.upload.onerror = handleTransferFailed;
+// req.open(
+//   "POST",
+//   `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/new-bucket/${file.name}`
+// );
+// req.send(file);

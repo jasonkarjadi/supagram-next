@@ -18,7 +18,7 @@ const useRealtime = (channelName: string) => {
       .channel(channelName)
       .on("postgres_changes", { event: "INSERT", schema, table }, (payload) => {
         console.log(payload);
-        setRows([payload.new, ...rows]);
+        setRows((rows) => [payload.new, ...rows]);
       })
       .subscribe();
     return () => {

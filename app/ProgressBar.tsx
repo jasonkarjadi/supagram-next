@@ -1,5 +1,6 @@
 "use client";
 
+import { motion } from "framer-motion";
 import { Dispatch, FC, SetStateAction, useEffect } from "react";
 import useStorage from "../hooks/useStorage";
 
@@ -15,7 +16,13 @@ const MyProgressBar: FC<MyProgressBarProps> = ({ fileState }) => {
     if (url) setFile(null);
   }, [file]);
 
-  return <div className="progress-bar" style={{ width: `${progress}%` }} />;
+  return (
+    <motion.div
+      className="progress-bar"
+      initial={{ width: 0 }}
+      animate={{ width: `${progress}%` }}
+    />
+  );
 };
 
 export default MyProgressBar;

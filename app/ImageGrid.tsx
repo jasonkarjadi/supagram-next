@@ -1,5 +1,6 @@
 "use client";
 
+import { motion } from "framer-motion";
 import { Dispatch, FC, SetStateAction } from "react";
 import useRealtime from "../hooks/useRealtime";
 
@@ -15,9 +16,20 @@ const MyImageGrid: FC<MyImageGridProps> = ({ setSelectedImg }) => {
   return (
     <div className="img-grid">
       {(rows as Row[]).map(({ id, url }) => (
-        <div className="img-wrap" key={id} onClick={() => setSelectedImg(url)}>
-          <img src={url} alt="uploaded pic" />
-        </div>
+        <motion.div
+          className="img-wrap"
+          key={id}
+          onClick={() => setSelectedImg(url)}
+          whileHover={{ opacity: 1 }}
+          layout
+        >
+          <motion.img
+            src={url}
+            alt="uploaded pic"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+          />
+        </motion.div>
       ))}
     </div>
   );
